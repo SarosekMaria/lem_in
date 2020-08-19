@@ -2,6 +2,18 @@
 
 //file for printing rooms and links
 
+void	ft_print_paths(t_path **top_paths)
+{
+	t_path	*tmp_path;
+
+	tmp_path = *top_paths;
+	while (tmp_path)
+	{
+	    ft_printf("Path\nbegin:%s-%s\nlength:%d\noutput_fork:%d\n\n", tmp_path->begin->begin->name, tmp_path->begin->end->name, tmp_path->length, tmp_path->output_fork);
+		tmp_path = tmp_path->next;
+	}
+}
+
 void	ft_print_rooms(t_room **head)
 {
 	t_room	*tmp;

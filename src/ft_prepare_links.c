@@ -20,6 +20,7 @@ void		ft_reset_io(t_link **top_links)
 
 void		ft_del_dead_links(t_link **top_links)
 {
+ft_printf("+++++++++FT_DEL_DEAD_LINKS+++++++++\n");
 	t_link	*tmp;
 	int		dead_end_exists;
 
@@ -75,6 +76,7 @@ void	ft_io_count(t_link **top_links)
 
 void	ft_align_links(t_link **top_links)
 {
+ft_printf("--------FT_ALIGN_LINKS-------\n");
 	t_link	*tmp;
 	t_room	*swap_tmp;
 

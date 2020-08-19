@@ -7,10 +7,12 @@ SRC_NAME = main.c\
 	ft_init_lemin.c\
 	ft_create_link.c\
 	ft_create_room.c\
+	ft_create_path.c\
 	ft_print.c\
 	ft_bfs.c\
 	ft_prepare_links.c\
-	ft_del_forks.c
+	ft_del_inforks.c\
+	ft_del_outforks.c
 OBJ_NAME = $(SRC_NAME:%.c=%.o)
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_NAME))

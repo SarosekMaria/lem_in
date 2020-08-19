@@ -39,7 +39,7 @@ t_room	*ft_create_room(char *name, int x, int y)
 
 void	ft_del_room(t_room **room)
 {
-	if (room != NULL)
+	if (room != NULL && *room)
 	{
 		ft_strdel(&((*room)->name));
 		free(*room);
@@ -51,7 +51,7 @@ void	ft_del_rooms(t_room **head)
 {
 	t_room	*tmp;
 
-	if (head != NULL)
+	if (head != NULL && *head)
 	{
 		while ((*head)->next)
 		{
