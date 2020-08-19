@@ -56,6 +56,7 @@ typedef struct			s_lemin
 	t_room				*top_rooms;
 	t_link				*top_links;
 	t_path				*top_paths;
+	int					quantity_path;//количество путей(для сортировки)
 	int					number_of_ants;
 	int					max_bfs;
 }						t_lemin;
@@ -92,5 +93,8 @@ void	ft_del_inforks(t_lemin *lemin);
 void	ft_del_outforks(t_lemin *lemin);
 void	ft_del_other_links(t_lemin *lemin, t_path *surviving_path);
 void	ft_add_path(t_path **top_paths, t_path *new_path);
+void	ft_form_path(t_lemin *lemin);
+void	ft_sort_path(t_path **top_paths, int quantity_path);
+void	ft_create_se_path(t_link *head_link, t_lemin *lemin);
 
 #endif

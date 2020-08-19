@@ -68,11 +68,12 @@ while (tmp)
 	ft_io_count(&lemin->top_links);
 //	ft_print_links(top_links);
 	ft_del_dead_links(&lemin->top_links);//удаление ссылок, у которых output==0 или input==0
-	ft_print_links(&lemin->top_links);
-	ft_print_room_property(&lemin->top_rooms);//печать комнат со всеми свойствами
+//	ft_print_links(&lemin->top_links);
+//	ft_print_room_property(&lemin->top_rooms);//печать комнат со всеми свойствами
 	ft_find_max_bfs(lemin);
 	ft_del_inforks(lemin);
 	ft_del_outforks(lemin);
 	ft_print_room_property(&lemin->top_rooms);
 	ft_print_links(&lemin->top_links);
+	ft_form_path(lemin);
 }

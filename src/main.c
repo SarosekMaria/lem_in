@@ -5,6 +5,7 @@ int main()
 	t_lemin	*lemin;
 
 	lemin = ft_init_lemin();
+ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_path);
 //после парсинга получаю указатель на голову списка комнат и указатель на голову списка ссылок
 	t_room	*r0;
 	t_room	*r1;
