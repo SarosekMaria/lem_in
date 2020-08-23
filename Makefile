@@ -12,7 +12,9 @@ SRC_NAME = main.c\
 	ft_bfs.c\
 	ft_prepare_links.c\
 	ft_del_inforks.c\
-	ft_del_outforks.c
+	ft_del_outforks.c\
+	ft_create_ant.c\
+	ft_manipulate_ants.c
 OBJ_NAME = $(SRC_NAME:%.c=%.o)
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_NAME))

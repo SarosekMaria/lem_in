@@ -1,6 +1,6 @@
 #include "ft_lemin.h"
 
-t_queue	*ft_new_qelem(t_room *room)
+t_queue		*ft_new_qelem(t_room *room)
 {
 	t_queue	*new;
 
@@ -12,7 +12,7 @@ t_queue	*ft_new_qelem(t_room *room)
 	return (new);
 }
 
-t_queue	*ft_enqueue(t_queue **tail, t_room *room, t_queue **head)
+t_queue		*ft_enqueue(t_queue **tail, t_room *room, t_queue **head)
 {
 	t_queue	*new_tail;
 
@@ -35,7 +35,7 @@ t_queue	*ft_enqueue(t_queue **tail, t_room *room, t_queue **head)
 	return (*tail);
 }
 
-t_room	*ft_dequeue(t_queue **head, t_queue **tail)
+t_room		*ft_dequeue(t_queue **head, t_queue **tail)
 {
 	t_room	*room;
 	t_queue	*new_head;

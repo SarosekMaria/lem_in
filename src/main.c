@@ -18,6 +18,11 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	t_room	*r8;
 	t_room	*r9;
 	t_room	*r10;
+	t_room	*r11;
+	t_room	*r12;
+	t_room	*r13;
+	t_room	*r14;
+	t_room	*r15;
 
 	char	*name_r0;
 	char	*name_r1;
@@ -30,6 +35,11 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	char	*name_r8;
 	char	*name_r9;
 	char	*name_r10;
+	char	*name_r11;
+	char	*name_r12;
+	char	*name_r13;
+	char	*name_r14;
+	char	*name_r15;
 
 	t_link	*first;
 	t_link	*second;
@@ -45,7 +55,12 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	t_link	*twelfth;
 	t_link	*thirteenth;
 	t_link	*fourteenth;
-//	t_link	*fifteenth;
+	t_link	*fifteenth;
+	t_link	*sixteenth;
+	t_link	*seventeenth;
+	t_link	*eighteenth;
+	t_link	*ninteenth;
+	t_link	*twentienth;
 
 	ft_printf("There would be validation\n");
 	ft_printf("And there would be parsing\n");	
@@ -61,6 +76,11 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	name_r8 = ft_strnew(1);
 	name_r9 = ft_strnew(1);
 	name_r10 = ft_strnew(2);
+	name_r11 = ft_strnew(2);
+	name_r12 = ft_strnew(2);
+	name_r13 = ft_strnew(2);
+	name_r14 = ft_strnew(2);
+	name_r15 = ft_strnew(2);
 
 	name_r0[0] = 's';
 	name_r1[0] = '1';
@@ -74,7 +94,16 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	name_r9[0] = 'e';
 	name_r10[0] = '1';
 	name_r10[1] = '0';
-
+	name_r11[0] = '1';
+	name_r11[1] = '1';
+	name_r12[0] = '1';
+	name_r12[1] = '2';
+	name_r13[0] = '1';
+	name_r13[1] = '3';
+	name_r14[0] = '1';
+	name_r14[1] = '4';
+	name_r15[0] = '1';
+	name_r15[1] = '5';
 
 	r0 = ft_create_room(name_r0, 0, 0);
 	r1 = ft_create_room(name_r1, 0, 0);
@@ -87,6 +116,11 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	r8 = ft_create_room(name_r8, 0, 0);
 	r9 = ft_create_room(name_r9, 0, 0);
 	r10 = ft_create_room(name_r10, 0, 0);
+	r11 = ft_create_room(name_r11, 0, 0);
+	r12 = ft_create_room(name_r12, 0, 0);
+	r13 = ft_create_room(name_r13, 0, 0);
+	r14 = ft_create_room(name_r14, 0, 0);
+	r15 = ft_create_room(name_r15, 0, 0);
 
 	r0->status = 0;//не забыть сразу указать особый статус для start и end
 	r9->status = 2;
@@ -104,6 +138,11 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	r7->next = r8;
 	r8->next = r9;
 	r9->next = r10;
+	r10->next = r11;
+	r11->next = r12;
+	r12->next = r13;
+	r13->next = r14;
+	r14->next = r15;
 
 	first = ft_create_link(r1, r0);
 	second = ft_create_link(r0, r2);
@@ -119,7 +158,12 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	twelfth = ft_create_link(r8, r9);
 	thirteenth = ft_create_link(r9, r7);
 	fourteenth = ft_create_link(r10, r9);
-//	fifteenth = ft_create_link(r2, r3);
+	fifteenth = ft_create_link(r0, r11);
+	sixteenth = ft_create_link(r11, r12);
+	seventeenth = ft_create_link(r12, r13);
+	eighteenth = ft_create_link(r13, r14);
+	ninteenth = ft_create_link(r14, r15);
+	twentienth = ft_create_link(r15, r9);
 
 	first->next = second;
 	second->next = third;
@@ -147,14 +191,24 @@ ft_printf("±±±±±±± AT THE begin quantity_path = %d\n", lemin->quantity_pa
 	thirteenth->next = fourteenth;
 	thirteenth->prev = twelfth;
 	fourteenth->prev = thirteenth;
-//	fourteenth->next = fifteenth;
-//	fifteenth->prev = fourteenth;
+	fourteenth->next = fifteenth;
+	fifteenth->prev = fourteenth;
+	fifteenth->next = sixteenth;
+	sixteenth->next = seventeenth;
+	sixteenth->prev = fifteenth;
+	seventeenth->next = eighteenth;
+	seventeenth->prev = sixteenth;
+	eighteenth->next = ninteenth;
+	eighteenth->prev = seventeenth;
+	ninteenth->next = twentienth;
+	ninteenth->prev = eighteenth;
+	twentienth->prev = ninteenth;
 
 	lemin->start = r0;
 	lemin->end = r9;
 	lemin->top_rooms = r0;
 	lemin->top_links = first;
-	lemin->number_of_ants = 10;
+	lemin->number_of_ants = 20;
 
 	ft_print_rooms(&(lemin->top_rooms));
 	ft_print_links(&(lemin->top_links));

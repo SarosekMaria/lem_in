@@ -51,16 +51,6 @@ void	ft_bfs(t_lemin *lemin)
 	number = 0;
 	while (!(head == NULL && tail == NULL))
 		ft_find_room_neighbour(&number, &lemin->top_links, &head, &tail);
-/*проверка разметки bfs
-t_room	*tmp;
-tmp = *top_rooms;
-while (tmp)
-{
-	ft_printf("name:%s\nbfslvl:%d\nstatus:%d\nnumber:%d\n", tmp->name, tmp->bfslvl, tmp->status,tmp->room_number);
-	tmp = tmp->next;
-	ft_printf("\n\n");
-}
-*/
 	ft_del_useless_links(&lemin->top_links);
 //	ft_print_links(top_links);//проверка удалены ли все бесполезные ссылки
 	ft_align_links(&lemin->top_links);
@@ -76,4 +66,5 @@ while (tmp)
 	ft_print_room_property(&lemin->top_rooms);
 	ft_print_links(&lemin->top_links);
 	ft_form_path(lemin);
+	ft_manipulate_ants(lemin);
 }
