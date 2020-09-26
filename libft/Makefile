@@ -6,7 +6,7 @@
 #    By: sassassi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 14:24:17 by sassassi          #+#    #+#              #
-#    Updated: 2020/02/11 17:20:28 by sassassi         ###   ########.fr        #
+#    Updated: 2020/08/29 18:09:58 by sassassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_NAME = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c\
 	ft_buf_init_dioux.c ft_buf_init_float.c ft_buf_init_u.c\
 	ft_buf_init_o.c ft_buf_init_d.c ft_buf_init_x.c ft_itoa_u.c\
 	ft_itoa_s.c ft_if_hash.c ft_sum_str_int.c kostyliivelosipedy.c\
-	ft_buf_init_inff.c ft_help_2.c ft_print_binar.c
+	ft_buf_init_inff.c ft_help_2.c ft_print_binar.c get_next_line.c
 SRC_DIR = ./
 OBJ_NAME = $(SRC_NAME:%.c=%.o)
 OBJ_DIR = obj/

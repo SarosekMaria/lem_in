@@ -1,98 +1,90 @@
 #include "ft_lemin.h"
 
-void		ft_sort_path(t_path **top_paths, int quantity_path)
+static void ft_nullify_path(t_room *room)
 {
-	t_path	*tmp;
-	t_path	*new_top;
-	t_path	*prev;
-	int		position;
+    t_room  *tmp;
+    t_room  *next_room;
 
-	position = 0;
-	tmp = (*top_paths)->next;
-	prev = *top_paths;
-	new_top = (*top_paths)->next;
-	while (position < quantity_path - 1 && (*top_paths)->length > tmp->length)
-	{
-ft_printf("position = %d\n", position);
-		tmp = tmp->next;
-		prev = prev->next;
-		position++;
-	}
-	if (position <= quantity_path - 1 && position != 0)//элемент необходимо вставить в середину
-	{
-		prev->next = *top_paths;
-		(*top_paths)->next = tmp;
-		*top_paths = new_top;
-
-	}
+    tmp = room;
+    while (tmp->prev_room && tmp->prev_room->status != 0)
+        tmp = tmp->prev_room;
+    //теперь в tmp лежит начало пути
+    while (tmp && tmp->status == 1)
+    {
+        next_room = tmp->next_room;
+        tmp->prev_room = NULL;
+        tmp->next_room = NULL;
+        tmp = next_room;
+    }
 }
 
-void		ft_form_path(t_lemin *lemin)
+void        ft_path_modification(t_path *path)
 {
-ft_printf("##########FT_FORM_PATH#######\n");
-	t_link	*tmp;
+    t_room  *prev_r;
+    t_fpath *tmp;
 
-	tmp = lemin->top_links;
-//	lemin->quantity_path = 0;//по какой-то причине приходит сюда не 0, поэтому обнуляем
-	ft_printf("before cycle lemin->quantity_path = %d\n", lemin->quantity_path);
-	while (tmp)
-	{
-		if (tmp->begin == lemin->start)
-		{
-			ft_create_se_path(tmp, lemin);
-			(lemin->quantity_path)++;
-ft_printf("lemin->quantity = %d\n", lemin->quantity_path);
-			ft_sort_path(&lemin->top_paths, lemin->quantity_path);
-		}
-		tmp = tmp->next;
-	}
-	ft_print_paths(&lemin->top_paths);
+    tmp = path->top_fpath;
+    while(tmp)//для каждой комнаты в пути разрушаем имеющийся путь
+    {
+        if (tmp->room->next_room != NULL && tmp->room->prev_room != NULL)//если путь уже есть
+            ft_nullify_path(tmp->room);
+        tmp = tmp->next;
+    }
+    tmp = path->top_fpath;
+    prev_r = NULL;
+    while (tmp)
+    {
+        if (!(prev_r != NULL && prev_r->status != 1 && tmp->room->status != 1))
+        {
+            if (prev_r != NULL && prev_r->status == 1)
+                prev_r->next_room = tmp->room;
+            if (tmp->room->status == 1)
+                tmp->room->prev_room = prev_r;
+        }
+//        ft_connect_rooms(prev_r, tmp->room);
+        prev_r = tmp->room;
+        tmp = tmp->next;
+    }
 }
 
-void		ft_add_path(t_path **top_paths, t_path *new_path)
+t_fpath     *ft_create_fpath(t_room *room)
 {
-	new_path->next = *top_paths;
-	*top_paths = new_path;
+    t_fpath *new_fpath;
+
+    new_fpath = (t_fpath *)malloc(sizeof(t_fpath));
+    if (!new_fpath)
+        return (NULL);
+    new_fpath->room = room;
+    new_fpath->next = NULL;
+    return (new_fpath);
 }
 
-t_path		*ft_create_path(t_link *begin, int length)
+void        ft_addelem_path(t_path *path, t_room *room)
 {
-	t_path	*new;
+    t_fpath *fpath_elem;
 
-	new = (t_path*)malloc(sizeof(t_path) * 1);
-	if (!new)
-		return (NULL);
-	new->begin = begin;
-	new->length = length;
-	new->output_fork = 0;
-	new->next = NULL;
-	return (new);
+    if (path->top_fpath == NULL)
+        path->top_fpath = ft_create_fpath(room);
+    else
+    {
+        fpath_elem = ft_create_fpath(room);
+        fpath_elem->next = path->top_fpath;
+        path->top_fpath = fpath_elem;
+    }
+    path->len++;
 }
 
-void		ft_del_path(t_path **path)
+t_path      *ft_create_path(void)
 {
-	if (path != NULL && *path)
-	{
-		(*path)->begin = NULL;
-		(*path)->length = 0;
-		free(*path);
-		*path = NULL;
-	}
-}
+    t_path  *new_path;
 
-void		ft_del_paths(t_path **top_paths)
-{
-	t_path	*tmp;
-
-	if (top_paths != NULL && *top_paths != NULL)
-	{
-		while ((*top_paths)->next)
-		{
-			tmp = (*top_paths)->next;
-			ft_del_path(top_paths);
-			*top_paths = tmp;
-		}
-		ft_del_path(top_paths);
-		*top_paths = NULL;
-	}
+    new_path = (t_path *)malloc(sizeof(t_path) * 1);
+    if (!new_path)
+        return (NULL);
+    new_path->len = -1;
+ //   new_path->ants_in_path = 0;
+ //   new_path->head_ants = NULL;
+  //  new_path->tail_ants = NULL;
+    new_path->top_fpath = NULL;
+    return (new_path);
 }

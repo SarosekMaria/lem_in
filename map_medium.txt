@@ -1,0 +1,56 @@
+6
+##start
+start 1 0
+r1 0 1
+r4 0 2
+r7 0 3
+r2 2 1
+r5 2 2
+r8 2 3
+r3 3 1
+r6 3 2
+r9 3 3
+r10 4 2
+r11 5 1
+r13 1 2
+r14 6 1
+r15 6 2
+r16 6 3
+r17 6 4
+r18 6 5
+r19 6 6
+r20 6 7
+r21 6 8
+r22 7 1
+r23 7 2
+r24 7 3
+##end
+end 1 4
+start-r1
+start-r2
+start-r3
+start-r22
+r22-r23
+r1-r4
+r2-r5
+r3-r6
+r4-r7
+r5-r8
+r6-r9
+r7-end
+r8-end
+r9-end
+r6-r5
+r6-r10
+r10-r11
+r2-r13
+r13-end
+start-r14
+r14-r15
+r15-r16
+r16-r17
+r17-r18
+r18-r19
+r19-r20
+r20-r21
+r21-end

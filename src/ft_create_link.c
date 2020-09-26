@@ -48,27 +48,35 @@ void	ft_cleaner_links(t_link **tmp, t_link **top_links)
 {
 	t_link  *tmp_prev;
 
-	if ((*tmp)->prev == NULL)//если элемент стоит первым в списке
+	if (tmp && top_links)
 	{
-ft_printf("FT_CLEANER: element is the first (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
-		((*tmp)->next)->prev = NULL;
-		*top_links = (*tmp)->next;
-		ft_del_link(tmp);
-		*tmp = *top_links;
-	}
-	else if ((*tmp)->prev != NULL && (*tmp)->next != NULL)//элемент между др. двумя
-	{
-ft_printf("FT_CLEANER: element is inner (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
-		((*tmp)->prev)->next = (*tmp)->next;
-		((*tmp)->next)->prev = (*tmp)->prev;
-		tmp_prev = (*tmp)->prev;
-		ft_del_link(tmp);
-		*tmp = tmp_prev;
-	}
-	else if ((*tmp)->next == NULL)//последний элемент в списке
-	{
-ft_printf("FT_CLEANER: element is the last (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
-		((*tmp)->prev)->next = NULL;
-		ft_del_link(tmp);
+		if ((*tmp)->prev == NULL && (*tmp)->next != NULL)//если элемент стоит первым в списке
+		{
+//ft_printf("FT_CLEANER: element is the first (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
+			((*tmp)->next)->prev = NULL;
+			*top_links = (*tmp)->next;
+			ft_del_link(tmp);
+			*tmp = *top_links;
+		}
+		else if ((*tmp)->prev == NULL && (*tmp)->next == NULL)
+		{
+			*top_links = NULL;
+			ft_del_link(tmp);
+		}
+		else if ((*tmp)->prev != NULL && (*tmp)->next != NULL)//элемент между др. двумя
+		{
+//ft_printf("FT_CLEANER: element is inner (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
+			((*tmp)->prev)->next = (*tmp)->next;
+			((*tmp)->next)->prev = (*tmp)->prev;
+			tmp_prev = (*tmp)->prev;
+			ft_del_link(tmp);
+			*tmp = tmp_prev;
+		}
+		else if ((*tmp)->next == NULL)//последний элемент в списке
+		{
+//ft_printf("FT_CLEANER: element is the last (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
+			((*tmp)->prev)->next = NULL;
+			ft_del_link(tmp);
+		}
 	}
 }
