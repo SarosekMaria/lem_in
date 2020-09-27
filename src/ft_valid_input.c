@@ -4,7 +4,10 @@ void		check_input(t_lemin *lemin)
 {
     int i;
 
-	lemin->fd = open("map_medium.txt", O_RDONLY);
+//	lemin->fd = open("map.txt", O_RDONLY);
+//	lemin->fd = open("bs.txt", O_RDONLY);
+//	lemin->fd = open("map_medium.txt", O_RDONLY);
+	lemin->fd = 0;
     i = 0;
 	while (get_next_line(lemin->fd, &lemin->line) > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: assasin <assasin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:25:15 by sassassi          #+#    #+#             */
-/*   Updated: 2020/09/26 22:32:21 by assasin          ###   ########.fr       */
+/*   Updated: 2020/09/27 17:34:59 by assasin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int main()
 		if (ft_solution(lemin) == -1)
 			ft_exit(lemin, 0);
 		ft_print_input(lemin);
-		ft_print_group(lemin->best_group);
+//		ft_print_group(lemin->best_group);
+		ft_manipulate_ant(lemin, lemin->best_group);
 		ft_printf("total rounds = %u\n", lemin->best_group->num_of_turns);
 		ft_del_lemin(&lemin);
 	}

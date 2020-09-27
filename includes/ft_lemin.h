@@ -6,7 +6,7 @@
 /*   By: assasin <assasin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 14:18:37 by sassassi          #+#    #+#             */
-/*   Updated: 2020/09/26 23:30:58 by assasin          ###   ########.fr       */
+/*   Updated: 2020/09/27 14:50:11 by assasin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct		s_fpath
 
 typedef struct		s_ant
 {
-    t_room			*cur_room;
-    unsigned int	i;
+ //   t_room			*cur_room;
     t_fpath			*cur_location;
+    size_t			i;
     struct s_ant	*next;
     struct s_ant	*prev;
 }					t_ant;
@@ -77,8 +77,6 @@ typedef struct		s_path
 {
 	int				len;//длина пути
 //	size_t			ants_in_path;//кол-во муравьев в пути;
-//	t_ant			*head_ants;
-//	t_ant			*tail_ants;
 	t_fpath			*top_fpath;//список комнат в пути
 }					t_path;
 
@@ -104,8 +102,8 @@ typedef struct		s_lemin
 	t_room			*top_rooms;
 	t_link			*top_links;
 	t_group			*best_group;
-//	t_ant			*head_ants;
-//	t_ant			*tail_ants;
+	t_ant			*head_ants;
+	t_ant			*tail_ants;
 	unsigned int	num_of_ants;
 	unsigned int	ants_at_the_end;
 	char			*line;
@@ -156,7 +154,11 @@ t_path				*ft_bfs_tree(t_lemin *lemin);
 /*
 ** ft_create_ant.c
 */
-void				ft_distrib_ants(t_group *g, size_t num_of_ants);
+t_ant				*ft_create_ant(t_fpath *cur_location, size_t i);
+void				ft_del_ants(t_ant **top);
+void				ft_del_ant(t_ant **ant);
+void				ft_cleaner_ant(t_ant **tmp, t_ant **head, t_ant **tail);
+void				ft_add_ant(t_ant **head, t_ant **tail, t_ant *ant);
 
 /*
 ** ft_create_gpaths.c
@@ -223,6 +225,12 @@ void				ft_del_dead_ends(t_room **top_rooms);
 t_lemin				*ft_init_lemin(void);
 void				ft_del_lemin(t_lemin **lemin);
 void				ft_exit(t_lemin *lemin, int flag);
+
+/*
+** ft_manipulate_ant.c
+*/
+void				ft_distrib_ants(t_group *g, size_t num_of_ants);
+void				ft_manipulate_ant(t_lemin *lemin, t_group *g);
 
 /*
 ** ft_navigation.c

@@ -18,6 +18,7 @@ SRC_NAME = main.c\
 	ft_create_tree.c\
 	ft_del_dead_ends.c\
 	ft_init_lemin.c\
+	ft_manipulate_ant.c\
 	ft_navigation.c\
 	ft_path_utils.c\
 	ft_print.c\

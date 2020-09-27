@@ -22,8 +22,8 @@ t_lemin	*ft_init_lemin(void)
 		lemin->top_rooms = NULL;
 		lemin->top_links = NULL;
 		lemin->best_group = NULL;
-//		lemin->head_ants = NULL;
-//		lemin->tail_ants = NULL;
+		lemin->head_ants = NULL;
+		lemin->tail_ants = NULL;
 		lemin->num_of_ants = 0;
 		lemin->ants_at_the_end = 0;
 		lemin->line = NULL;
@@ -45,8 +45,8 @@ void	ft_del_lemin(t_lemin **lemin)
 		ft_del_Output(&(*lemin)->Output);
 		(*lemin)->start = NULL;
 		(*lemin)->end = NULL;
-//		(*lemin)->head_ants = NULL;
-//		(*lemin)->tail_ants = NULL;
+		(*lemin)->head_ants = NULL;
+		(*lemin)->tail_ants = NULL;
 		(*lemin)->num_of_ants = 0;
 		(*lemin)->ants_at_the_end = 0;
 		free(*lemin);
