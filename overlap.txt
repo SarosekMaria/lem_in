@@ -1,0 +1,26 @@
+10
+##start
+start 2 1
+r1 1 2
+r2 2 2
+r3 2 3
+r4 3 2
+r5 3 3
+r6 3 4
+##end
+end 2 5
+start-r1
+start-r4
+start-r2
+r1-r2
+r2-r4
+r1-end
+r1-r3
+r2-r3
+r3-r4
+r4-r5
+r3-r5
+r3-end
+r3-r6
+r5-r6
+r6-end

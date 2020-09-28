@@ -53,16 +53,16 @@ void        ft_move_ants_forward(t_lemin *lemin)
         if (tmp && tmp->cur_location)
         {
             tmp->cur_location = tmp->cur_location->next;
-//            ft_printf("L%d-%s", tmp->i + 1, tmp->cur_location->room->name);
+            ft_printf("L%d-%s", tmp->i + 1, tmp->cur_location->room->name);
             if (tmp->cur_location->room == lemin->end)
                 lemin->ants_at_the_end++;
-//            if (tmp->next)
-//                ft_printf(" ");
+            if (tmp->next)
+                ft_printf(" ");
             tmp = tmp->next;
         }
     }
- //   if (lemin->head_ants && lemin->tail_ants)
- //       ft_printf("\n");
+    if (lemin->head_ants && lemin->tail_ants)
+        ft_printf("\n");
 }
 
 void        ft_manipulate_ant(t_lemin *lemin, t_group *g)
