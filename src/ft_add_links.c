@@ -12,6 +12,8 @@ void        write_link(t_lemin *lemin)
 	create_link(lemin);
 	if (new_link->next != NULL)
 		check_links_dup(lemin->top_links, new_link);
+	if(lemin->visual == 1)
+		ft_printf("%s %s\n", new_link->begin->name, new_link->end->name);
 }
 
 void        add_list_links(t_link **top_links, t_link *link)

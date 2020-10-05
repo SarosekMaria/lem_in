@@ -3,11 +3,9 @@
 void		check_input(t_lemin *lemin)
 {
     int i;
-
-//	lemin->fd = open("map.txt", O_RDONLY);
-//	lemin->fd = open("bs.txt", O_RDONLY);
 //	lemin->fd = open("map_medium.txt", O_RDONLY);
 	lemin->fd = 0;
+
     i = 0;
 	while (get_next_line(lemin->fd, &lemin->line) > 0)
 	{
@@ -18,10 +16,7 @@ void		check_input(t_lemin *lemin)
 		else if (lemin->line[0] == '#')
 			ft_parse_command(lemin, 1);
 		else if (check_room_or_link(lemin, 0))
-		{
-//			ft_error("некорректне данные1");
 			ft_error("ERROR: incorrect input data\n");
-		}
 		if (!lemin->Output)
 			lemin->Output = ft_create_out(lemin->line);
 		else
@@ -29,10 +24,8 @@ void		check_input(t_lemin *lemin)
 		free(lemin->line);
 	}
 	if (!start_end(lemin))
-//		ft_error("no end or start");
 		ft_error("ERROR: no end or start\n");
 	if (!lemin->top_links)
-//		ft_error("некорректне данные2");
 		ft_error("ERROR; incorrect input data\n");
 	close(lemin->fd);
 }
@@ -43,16 +36,16 @@ void		is_digits(t_lemin *lemin)
 
 	i = 0;
 	if (lemin->line[0] == '\0')
-//		ft_error("Некорректное колличество муравьев.");
 		ft_error("ERROR: incorrect number of ants\n");
 	while (lemin->line[i] != '\0')
 	{
 		if (!ft_isdigit(lemin->line[i]))
-//			ft_error("Некорректное колличество муравьев.");
 			ft_error("ERROR: incorrect number of ants\n");
 		i++;
 	}
 	lemin->num_of_ants = ft_atoi(lemin->line);
+	if(lemin->visual == 1)
+		ft_printf("%d\n", lemin->num_of_ants);
 }
 
 int			isdigit_my(char **str, int i)

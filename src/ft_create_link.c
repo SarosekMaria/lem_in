@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_create_link.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 18:28:36 by sassassi          #+#    #+#             */
+/*   Updated: 2020/10/02 19:23:57 by sassassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_lemin.h"
 
-t_link	*ft_create_link(t_room *begin, t_room *end)
+t_link		*ft_create_link(t_room *begin, t_room *end)
 {
 	t_link	*new;
 
@@ -14,7 +26,7 @@ t_link	*ft_create_link(t_room *begin, t_room *end)
 	return (new);
 }
 
-void	ft_del_link(t_link **link)
+void		ft_del_link(t_link **link)
 {
 	if (link != NULL && *link)
 	{
@@ -27,7 +39,7 @@ void	ft_del_link(t_link **link)
 	}
 }
 
-void	ft_del_links(t_link **head)
+void		ft_del_links(t_link **head)
 {
 	t_link	*tmp;
 
@@ -41,42 +53,5 @@ void	ft_del_links(t_link **head)
 		}
 		ft_del_link(head);
 		*head = NULL;
-	}
-}
-
-void	ft_cleaner_links(t_link **tmp, t_link **top_links)
-{
-	t_link  *tmp_prev;
-
-	if (tmp && top_links)
-	{
-		if ((*tmp)->prev == NULL && (*tmp)->next != NULL)//если элемент стоит первым в списке
-		{
-//ft_printf("FT_CLEANER: element is the first (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
-			((*tmp)->next)->prev = NULL;
-			*top_links = (*tmp)->next;
-			ft_del_link(tmp);
-			*tmp = *top_links;
-		}
-		else if ((*tmp)->prev == NULL && (*tmp)->next == NULL)
-		{
-			*top_links = NULL;
-			ft_del_link(tmp);
-		}
-		else if ((*tmp)->prev != NULL && (*tmp)->next != NULL)//элемент между др. двумя
-		{
-//ft_printf("FT_CLEANER: element is inner (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
-			((*tmp)->prev)->next = (*tmp)->next;
-			((*tmp)->next)->prev = (*tmp)->prev;
-			tmp_prev = (*tmp)->prev;
-			ft_del_link(tmp);
-			*tmp = tmp_prev;
-		}
-		else if ((*tmp)->next == NULL)//последний элемент в списке
-		{
-//ft_printf("FT_CLEANER: element is the last (%s-%s)\n",(*tmp)->begin->name, (*tmp)->end->name);
-			((*tmp)->prev)->next = NULL;
-			ft_del_link(tmp);
-		}
 	}
 }

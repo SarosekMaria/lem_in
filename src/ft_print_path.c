@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_print_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/14 17:17:08 by sassassi          #+#    #+#             */
-/*   Updated: 2020/10/02 18:27:51 by sassassi         ###   ########.fr       */
+/*   Created: 2020/10/02 20:10:18 by sassassi          #+#    #+#             */
+/*   Updated: 2020/10/02 20:10:27 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_lemin.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+void	ft_print_fpath(t_fpath **top_fpath)
 {
-	t_list	*tmp;
+	t_fpath	*tmp;
 
-	if (alst != NULL && *alst != NULL)
+	if (top_fpath && *top_fpath)
 	{
-		tmp = (*alst)->next;
-		if (del)
-			(*del)((*alst)->content, (*alst)->content_size);
-		free(*alst);
-		*alst = tmp;
+		tmp = *top_fpath;
+		ft_printf("Fpath:");
+		while (tmp)
+		{
+			ft_printf("%s ", tmp->room->name);
+			tmp = tmp->next;
+		}
+		ft_printf("\n");
 	}
+}
+
+void	ft_print_path(t_path *path)
+{
+	ft_printf("len: %u\n", path->len);
+	ft_print_fpath(&path->top_fpath);
 }

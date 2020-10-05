@@ -1,13 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/05 20:15:19 by sassassi          #+#    #+#              #
+#    Updated: 2020/10/05 20:15:21 by sassassi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 NAME = lem-in
+VS_NAME = vs
 SRC_NAME = main.c\
 	ft_add_command.c\
 	ft_add_links.c\
 	ft_add_out.c\
 	ft_add_room.c\
 	ft_build_group.c\
+	ft_cleaner_ant.c\
 	ft_create_ant.c\
 	ft_create_gpaths.c\
 	ft_create_group.c\
@@ -21,6 +34,7 @@ SRC_NAME = main.c\
 	ft_manipulate_ant.c\
 	ft_navigation.c\
 	ft_path_utils.c\
+	ft_print_path.c\
 	ft_print.c\
 	ft_solution_utils.c\
 	ft_solution.c\
@@ -30,15 +44,29 @@ OBJ_NAME = $(SRC_NAME:%.c=%.o)
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_NAME))
 INC_DIR = includes/
-INC = -I $(INC_DIR)
-LIB_DIR = libft/
+INC = -I $(INC_DIR) -I $(SDL_HEADERS)
+LIB_DIR = ./libft/
 SRC_DIR = src/
+LIBRARIES = -lftprintf -L$(LIB_DIR) -L$(SDL_LIBRARY) -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_gfx
+SDL_LIBRARY = $(HOME)/.brew/lib
+SDL_HEADERS = $(HOME)/.brew/include
+LIBFT = $(LIB_DIR)libftprintf.a
+VS_SOURCES_LIST = vs.c
+VS_SOURCES = $(addprefix $(SRC_DIR), $(VS_SOURCES_LIST))
+VS_OBJECTS_LIST = $(patsubst %.c, %.o, $(VS_SOURCE_LIST))
+VS_OBJECTS = $(addprefix $(OBJ_DIR), $(VS_OBJECTS_LIST))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./$(LIB_DIR) -lftprintf -g
+
+$(VS_NAME): $(LIBFT) $(OBJ_DIR) $(VS_OBJECTS) $(OBJ)
+	@$(CC) $(FLAGS) -o $(VS_NAME) $(LIBRARIES) $(INC) $(VS_OBJECTS) $(OBJ)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -50,6 +78,7 @@ clean:
 
 fclean: clean
 	@/bin/rm -f $(NAME)
+	@/bin/rm -f $(VS_NAME)
 	@make -C $(LIB_DIR) fclean
 
 re: fclean all

@@ -21,16 +21,11 @@ r18 6 5
 r19 6 6
 r20 6 7
 r21 6 8
-r22 7 1
-r23 7 2
-r24 7 3
 ##end
 end 1 4
 start-r1
 start-r2
 start-r3
-start-r22
-r22-r23
 r1-r4
 r2-r5
 r3-r6

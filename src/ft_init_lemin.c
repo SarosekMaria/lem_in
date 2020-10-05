@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_lemin.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 18:37:53 by sassassi          #+#    #+#             */
+/*   Updated: 2020/10/02 19:43:11 by sassassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_lemin.h"
 
 void	ft_exit(t_lemin *lemin, int flag)
@@ -29,6 +41,7 @@ t_lemin	*ft_init_lemin(void)
 		lemin->line = NULL;
 		lemin->Output = NULL;
 		lemin->flag_end_begin = 0;
+		lemin->visual = 0;
 		lemin->fd = 0;
 	}
 	return (lemin);
@@ -41,7 +54,6 @@ void	ft_del_lemin(t_lemin **lemin)
 		ft_del_rooms(&((*lemin)->top_rooms));
 		ft_del_links(&((*lemin)->top_links));
 		ft_del_group((*lemin)->best_group);
-//		ft_strdel(&((*lemin)->line));
 		ft_del_Output(&(*lemin)->Output);
 		(*lemin)->start = NULL;
 		(*lemin)->end = NULL;
@@ -49,6 +61,7 @@ void	ft_del_lemin(t_lemin **lemin)
 		(*lemin)->tail_ants = NULL;
 		(*lemin)->num_of_ants = 0;
 		(*lemin)->ants_at_the_end = 0;
+		(*lemin)->visual = 0;
 		free(*lemin);
 		*lemin = NULL;
 	}

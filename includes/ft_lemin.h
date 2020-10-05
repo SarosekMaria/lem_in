@@ -3,43 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lemin.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assasin <assasin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 14:18:37 by sassassi          #+#    #+#             */
-/*   Updated: 2020/09/27 14:50:11 by assasin          ###   ########.fr       */
+/*   Updated: 2020/10/02 20:11:32 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LEMIN_H
 # define FT_LEMIN_H
 
-# define BUFF_SIZE 1
-# define MAS_SIZE 12000
-# include <stdlib.h>// malloc, free, perror, exit
-# include <unistd.h>// write
-# include <fcntl.h>// read
-# include <string.h>// strerror
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <string.h>
 # include "ft_printf.h"
 # include "libft.h"
-
-# define 	MAX_INT	2147483647
+# define BUFF_SIZE 1
+# define MAS_SIZE 12000
+# define MAX_INT 2147483647
 
 typedef struct		s_room
 {
 	char			*name;
-	int				status;//0 - start, 1 - middle, 2 - end
+	int				status;
 	int				x;
 	int				y;
-	int				ant_number;//в каждой комнате будет находиться муравей со своим №
 	int				visited;
 	int				flag_v;
-	size_t			links_count;//количество связей с др комнатами
+	size_t			links_count;
 	t_list			*neighbours;
 	struct s_room	*next_room;
 	struct s_room	*prev_room;
 	struct s_room	*next_in_list;
 }					t_room;
-
 
 typedef struct		s_tree
 {
@@ -50,7 +47,7 @@ typedef struct		s_tree
 	struct s_tree	*parent;
 }					t_tree;
 
-typedef struct		s_link//в идеале сразу распределять комнаты по матрице смежности,без этой структуры
+typedef struct		s_link
 {
 	t_room			*begin;
 	t_room			*end;
@@ -66,18 +63,16 @@ typedef struct		s_fpath
 
 typedef struct		s_ant
 {
- //   t_room			*cur_room;
-    t_fpath			*cur_location;
-    size_t			i;
-    struct s_ant	*next;
-    struct s_ant	*prev;
+	t_fpath			*cur_location;
+	size_t			i;
+	struct s_ant	*next;
+	struct s_ant	*prev;
 }					t_ant;
 
 typedef struct		s_path
 {
-	int				len;//длина пути
-//	size_t			ants_in_path;//кол-во муравьев в пути;
-	t_fpath			*top_fpath;//список комнат в пути
+	int				len;
+	t_fpath			*top_fpath;
 }					t_path;
 
 typedef struct		s_out
@@ -89,16 +84,16 @@ typedef struct		s_out
 
 typedef struct		s_group
 {
-	size_t			num_of_turns;//количество ходов с этой группой путей
-	size_t			num_of_paths;//количество путей в группе
-	int				*ants;//массив с количеством муравьев;
-	t_path			**paths;//массив со списками путей
+	size_t			num_of_turns;
+	size_t			num_of_paths;
+	int				*ants;
+	t_path			**paths;
 }					t_group;
 
 typedef struct		s_lemin
 {
-	t_room			*start;//чтобы не искать start
-	t_room			*end;//чтобы не искать end
+	t_room			*start;
+	t_room			*end;
 	t_room			*top_rooms;
 	t_link			*top_links;
 	t_group			*best_group;
@@ -109,10 +104,9 @@ typedef struct		s_lemin
 	char			*line;
 	t_out			*Output;
 	int				flag_end_begin;
-	int				fd;
+	int				fd;//
+	int				visual;
 }					t_lemin;
-
-
 
 void				check_input(t_lemin *lemin);
 void				is_digits(t_lemin *lemin);
@@ -140,9 +134,9 @@ int					ft_val_overflow(char *s);
 int					start_end(t_lemin *lemin);
 void				ft_print_input(t_lemin *lemin);
 
-
-
-
+/*
+** ft_solution.c
+*/
 int					ft_solution(t_lemin *lemin);
 
 /*
@@ -154,17 +148,21 @@ t_path				*ft_bfs_tree(t_lemin *lemin);
 /*
 ** ft_create_ant.c
 */
+void				ft_cleaner_ant(t_ant **tmp, t_ant **head, t_ant **tail);
+
+/*
+** ft_create_ant.c
+*/
 t_ant				*ft_create_ant(t_fpath *cur_location, size_t i);
 void				ft_del_ants(t_ant **top);
 void				ft_del_ant(t_ant **ant);
-void				ft_cleaner_ant(t_ant **tmp, t_ant **head, t_ant **tail);
 void				ft_add_ant(t_ant **head, t_ant **tail, t_ant *ant);
 
 /*
 ** ft_create_gpaths.c
 */
 void				ft_create_gpaths(t_room *start, t_group *group);
-size_t				ft_count_gpaths(t_room  *start);
+size_t				ft_count_gpaths(t_room *start);
 t_path				*ft_assemble_path(t_room *src, t_room *dst);
 
 /*
@@ -180,19 +178,18 @@ void				ft_del_group(t_group *group);
 t_link				*ft_create_link(t_room *begin, t_room *end);
 void				ft_del_link(t_link **link);
 void				ft_del_links(t_link **head);
-void				ft_cleaner_links(t_link **tmp, t_link **top_links);
 
 /*
 ** ft_create_nodes.c
 */
 t_path				*ft_add_nodeslst(t_lemin *lemin, t_list **nodes,
-                                            t_list **next_nodes);
+											t_list **next_nodes);
 t_path				*ft_add_node(t_lemin *lemin, t_tree *node,
 											t_list **next_nodes);
 
 /*
 ** ft_create_path.c
-*/											
+*/
 t_path				*ft_create_path(void);
 void				ft_addelem_path(t_path *path, t_room *room);
 t_fpath				*ft_create_fpath(t_room *room);
@@ -217,7 +214,7 @@ void				ft_del_node(t_tree *node);
 /*
 ** ft_del_dead_ends.c
 */
-void				ft_del_dead_ends(t_room **top_rooms);
+void				ft_del_dead_ends(t_room **top_rooms, t_lemin *lemin);
 
 /*
 ** ft_init_lemin.c
@@ -246,14 +243,18 @@ void				ft_del_path(t_path *path);
 void				ft_sortarr_paths(t_path **paths, size_t size);
 
 /*
+** ft_print_path.c
+*/
+void				ft_print_path(t_path *path);
+void				ft_print_fpath(t_fpath **top_fpath);
+
+/*
 ** ft_print.c
 */
 void				ft_print_links(t_link **head);
 void				ft_print_rooms(t_room **head);
 void				ft_print_room_links(t_list **links);
 void				ft_print_group(t_group *group);
-void				ft_print_path(t_path *path);
-void				ft_print_fpath(t_fpath **top_fpath);
 void				ft_print_input(t_lemin *lemin);
 
 /*

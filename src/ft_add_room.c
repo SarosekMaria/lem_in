@@ -58,6 +58,13 @@ void        write_room(t_lemin *lemin)
 	if (new_room->next_in_list != NULL)
 		check_room_dup(lemin->top_rooms, new_room);
 	free_str(str);
+	if(lemin->visual == 1)
+	{
+		if(lemin->top_rooms->status == 0)
+			ft_printf("%s %d %d start\n", lemin->top_rooms->name, lemin->top_rooms->x, lemin->top_rooms->y);
+		else
+			ft_printf("%s %d %d\n", lemin->top_rooms->name, lemin->top_rooms->x, lemin->top_rooms->y);
+	}
 }
 
 
