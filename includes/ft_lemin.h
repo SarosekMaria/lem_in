@@ -6,7 +6,7 @@
 /*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 14:18:37 by sassassi          #+#    #+#             */
-/*   Updated: 2020/10/02 20:11:32 by sassassi         ###   ########.fr       */
+/*   Updated: 2020/10/07 21:53:35 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ typedef struct		s_lemin
 	unsigned int	num_of_ants;
 	unsigned int	ants_at_the_end;
 	char			*line;
-	t_out			*Output;
+	t_out			*output;
 	int				flag_end_begin;
-	int				fd;//
 	int				visual;
+	int				flag_err;
 }					t_lemin;
 
 void				check_input(t_lemin *lemin);
@@ -129,11 +129,11 @@ int					get_next_line(const int fd, char **line);
 t_out				*ft_create_out(char *cont);
 t_out				*ft_add_out(t_out *out, char *str);
 int					isdigit_my(char **str, int i);
-void				ft_del_Output(t_out **out);
+void				ft_del_output(t_out **out);
 int					ft_val_overflow(char *s);
 int					start_end(t_lemin *lemin);
 void				ft_print_input(t_lemin *lemin);
-
+void				ft_free(char *start_name, char *end_name);
 /*
 ** ft_solution.c
 */

@@ -6,7 +6,7 @@
 /*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 15:25:15 by sassassi          #+#    #+#             */
-/*   Updated: 2020/10/02 20:33:33 by sassassi         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:36:42 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ void		ft_adjacency_matrix(t_room **top_rooms, t_link **top_links)
 	}
 }
 
+void		add_list_room(t_room **top_rooms, t_room *room)
+{
+	room->next_in_list = *top_rooms;
+	*top_rooms = room;
+}
+
+void		ft_free(char *start_name, char *end_name)
+{
+	free(start_name);
+	free(end_name);
+}
+
 int			main(int argc, char **argv)
 {
 	t_lemin	*lemin;
@@ -69,7 +81,6 @@ int			main(int argc, char **argv)
 		if (lemin->visual == 0)
 			ft_print_input(lemin);
 		ft_manipulate_ant(lemin, lemin->best_group);
-//		ft_printf("total rounds: %u\n", lemin->best_group->num_of_turns);
 		ft_del_lemin(&lemin);
 	}
 	return (0);

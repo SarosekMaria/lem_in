@@ -6,7 +6,7 @@
 /*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 21:40:06 by sassassi          #+#    #+#             */
-/*   Updated: 2020/10/02 20:10:14 by sassassi         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:20:22 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_print_input(t_lemin *lemin)
 {
-	while (lemin->Output->prev)
-		lemin->Output = lemin->Output->prev;
-	while (lemin->Output->next)
+	while (lemin->output->prev)
+		lemin->output = lemin->output->prev;
+	while (lemin->output->next)
 	{
-		ft_printf("%s\n", lemin->Output->content);
-		lemin->Output = lemin->Output->next;
+		ft_printf("%s\n", lemin->output->content);
+		lemin->output = lemin->output->next;
 	}
-	ft_printf("%s\n\n", lemin->Output->content);
+	ft_printf("%s\n\n", lemin->output->content);
 }
 
 void	ft_print_group(t_group *group)

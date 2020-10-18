@@ -6,7 +6,7 @@
 /*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 20:49:24 by sassassi          #+#    #+#             */
-/*   Updated: 2020/10/02 20:15:42 by sassassi         ###   ########.fr       */
+/*   Updated: 2020/10/18 10:15:46 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void		ft_del_dead_ends(t_room **top_rooms, t_lemin *lemin)
 	tmp = *top_rooms;
 	while (tmp)
 	{
-		if (tmp->links_count <= 1)
+		if (tmp->links_count <= 1 && tmp != lemin->start && tmp != lemin->end)
 		{
-			if (tmp == lemin->start || tmp == lemin->end)
-				ft_exit(lemin, 0);
 			if (tmp->links_count == 1)
 				ft_del_dead_link((t_room *)((tmp->neighbours->content)), tmp);
 			ft_delone_room(top_rooms, tmp);

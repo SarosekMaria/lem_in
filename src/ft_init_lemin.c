@@ -6,7 +6,7 @@
 /*   By: sassassi <sassassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 18:37:53 by sassassi          #+#    #+#             */
-/*   Updated: 2020/10/02 19:43:11 by sassassi         ###   ########.fr       */
+/*   Updated: 2020/10/07 21:54:19 by sassassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_lemin	*ft_init_lemin(void)
 		lemin->num_of_ants = 0;
 		lemin->ants_at_the_end = 0;
 		lemin->line = NULL;
-		lemin->Output = NULL;
+		lemin->output = NULL;
 		lemin->flag_end_begin = 0;
 		lemin->visual = 0;
-		lemin->fd = 0;
+		lemin->flag_err = 0;
 	}
 	return (lemin);
 }
@@ -54,7 +54,7 @@ void	ft_del_lemin(t_lemin **lemin)
 		ft_del_rooms(&((*lemin)->top_rooms));
 		ft_del_links(&((*lemin)->top_links));
 		ft_del_group((*lemin)->best_group);
-		ft_del_Output(&(*lemin)->Output);
+		ft_del_output(&(*lemin)->output);
 		(*lemin)->start = NULL;
 		(*lemin)->end = NULL;
 		(*lemin)->head_ants = NULL;
@@ -62,6 +62,7 @@ void	ft_del_lemin(t_lemin **lemin)
 		(*lemin)->num_of_ants = 0;
 		(*lemin)->ants_at_the_end = 0;
 		(*lemin)->visual = 0;
+		(*lemin)->flag_err = 0;
 		free(*lemin);
 		*lemin = NULL;
 	}

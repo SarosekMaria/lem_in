@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_add_out.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/06 16:09:57 by student           #+#    #+#             */
+/*   Updated: 2020/10/06 16:09:59 by student          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_lemin.h"
 
 t_out		*ft_add_out(t_out *out, char *str)
@@ -27,7 +39,7 @@ t_out		*ft_create_out(char *cont)
 	return (new);
 }
 
-void		ft_del_Outputs(t_out **out)
+void		ft_del_outputs(t_out **out)
 {
 	if (out != NULL && *out)
 	{
@@ -39,7 +51,7 @@ void		ft_del_Outputs(t_out **out)
 	}
 }
 
-void		ft_del_Output(t_out **out)
+void		ft_del_output(t_out **out)
 {
 	t_out	*tmp;
 
@@ -48,10 +60,10 @@ void		ft_del_Output(t_out **out)
 		while ((*out)->prev)
 		{
 			tmp = (*out)->prev;
-			ft_del_Outputs(out);
-			*out= tmp;
+			ft_del_outputs(out);
+			*out = tmp;
 		}
-		ft_del_Outputs(out);
+		ft_del_outputs(out);
 		*out = NULL;
 	}
 }
